@@ -74,7 +74,7 @@ namespace Sumcheck
             {
                 string header = objFolder.GetDetailsOf(null, i);
                 if (String.IsNullOrEmpty(header))
-                    break;
+                    continue;
                 var attribute = header;
                 var value = objFolder.GetDetailsOf(folderItem, i);
                 if (String.IsNullOrEmpty(value))
