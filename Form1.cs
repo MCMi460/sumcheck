@@ -85,13 +85,11 @@ namespace Sumcheck
 
             fileChecksumTable.Rows.Clear();
 
-            using (var stream = File.OpenRead(filePath))
-            {
-                fileChecksumTable.Rows.Add("MD5", BitConverter.ToString(MD5.Create().ComputeHash(stream)).Replace("-", ""));
-                fileChecksumTable.Rows.Add("SHA-1", BitConverter.ToString(new SHA1Managed().ComputeHash(stream)).Replace("-", ""));
-                fileChecksumTable.Rows.Add("SHA-256", BitConverter.ToString(new SHA256Managed().ComputeHash(stream)).Replace("-", ""));
-                fileChecksumTable.Rows.Add("SHA-512", BitConverter.ToString(new SHA512Managed().ComputeHash(stream)).Replace("-", ""));
-            }
+            byte[] data = File.ReadAllBytes(filePath);
+            fileChecksumTable.Rows.Add("MD5", BitConverter.ToString(MD5.Create().ComputeHash(data)).Replace("-", ""));
+            fileChecksumTable.Rows.Add("SHA-1", BitConverter.ToString(new SHA1Managed().ComputeHash(data)).Replace("-", ""));
+            fileChecksumTable.Rows.Add("SHA-256", BitConverter.ToString(new SHA256Managed().ComputeHash(data)).Replace("-", ""));
+            fileChecksumTable.Rows.Add("SHA-512", BitConverter.ToString(new SHA512Managed().ComputeHash(data)).Replace("-", ""));
         }
     }
 }
